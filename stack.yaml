@@ -37,11 +37,16 @@ resolver: lts-10.4
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - .
+- location:
+    git: https://github.com/ghcjs/jsaddle.git
+    commit: 1d575e3e310a8cd36c4bd2f61b89fe936868d6de
+  extra-dep: true
+  subdirs:
+    - jsaddle-warp
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
-- jsaddle-warp-0.9.5.0
-- websockets-0.10.0.0
 
 
 
