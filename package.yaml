@@ -20,11 +20,12 @@ extra-source-files:
 description:         Please see the README on Github at <https://github.com/githubuser/jsaddle3#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- jsaddle-warp
-- jsaddle
-- text
 - mtl
+- base                        >= 4.7 && < 5
+- text
+- jsaddle
+- jsaddle-warp
+- interpolatedstring-perl6
 # - transformers
 
 library:

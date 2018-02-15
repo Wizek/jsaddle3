@@ -39,7 +39,7 @@ packages:
 - .
 - location:
     git: https://github.com/ghcjs/jsaddle.git
-    commit: 1d575e3e310a8cd36c4bd2f61b89fe936868d6de
+    commit: fb9ba5a036efc8ebe9b528391c21c6880ce2e4c6
   extra-dep: true
   subdirs:
     - jsaddle-warp
