@@ -56,8 +56,8 @@ main = do
     })|]
     JSA.call jsFun JSA.global
       ( taEl
-      , JSA.function $ \_ _ _ -> do
-      -- , JSA.asyncFunction $ \_ _ _ -> do
+      -- , JSA.function $ \_ _ _ -> do
+      , JSA.asyncFunction $ \_ _ _ -> do
         prnt "!!!"
         -- io $ entersNoShiftTrigger ()
       )

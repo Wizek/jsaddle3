@@ -26,6 +26,8 @@ dependencies:
 - jsaddle
 - jsaddle-warp
 - interpolatedstring-perl6
+- reflex
+- reflex-dom-core
 # - transformers
 
 library:

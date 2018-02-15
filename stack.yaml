@@ -45,9 +45,30 @@ packages:
     - jsaddle-warp
     - jsaddle
 
+
+- location:
+    git: https://github.com/reflex-frp/reflex
+    commit: 60d2878142943487987feeeea108dbed5405f469
+  extra-dep: true
+
+- location:
+    # git: https://github.com/reflex-frp/reflex-dom
+    git: https://github.com/Wizek/reflex-dom
+    # commit: 1cdea3187bfadda0ffb1ba680a1c0c4260bc4fc6
+    # commit: 88467834b7a0914ff2cca2bb83689965b8634cff
+    # commit: a9f1582f1496f78497ddf037b7e197158bf2163f
+    commit: f8fa723a24859f276b1128cd5b6299ddd4fde5ce
+  extra-dep: true
+  subdirs:
+    # - reflex-dom
+    - reflex-dom-core
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
+- bifunctors-5.4.2
+- prim-uniq-0.1.0.1
+- zenc-0.1.1
 
 
 
