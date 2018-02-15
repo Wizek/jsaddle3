@@ -19,8 +19,24 @@ import            Language.Javascript.JSaddle        as JSA
 import            Language.Javascript.JSaddle.Warp   as JSA
 import            Language.Javascript.JSaddle.Debug  as JSA
 import            Text.InterpolatedString.Perl6
+import            Reflex.Dom.Core
 
-main = do
+
+main = mainReflex
+
+
+mainReflex = do
+  let
+    runFn =
+      -- run
+      debugAndWait
+
+  runFn 3197 $ mainWidget $ do
+    text "hello 2 3"
+    inp <- inputElement def
+    display $ value inp
+
+mainJSA = do
   putStrLn "init"
   -- debugAndWait 3197 $ do
   run 3197 $ do
