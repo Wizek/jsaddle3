@@ -23,6 +23,7 @@ dependencies:
 - mtl
 - base                        >= 4.7 && < 5
 - text
+- lens
 - jsaddle
 - jsaddle-warp
 - interpolatedstring-perl6

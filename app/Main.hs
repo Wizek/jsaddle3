@@ -20,26 +20,88 @@ import            Language.Javascript.JSaddle.Warp   as JSA
 import            Language.Javascript.JSaddle.Debug  as JSA
 import            Text.InterpolatedString.Perl6
 import            Reflex.Dom.Core
+import            Control.Lens hiding ((.>), element)
 
 
-main = mainReflex
+main =
+  mainReflex
+  -- mainJSA
 
+runFn =
+  -- run
+  debugAndWait
 
-mainReflex = do
-  let
-    runFn =
-      -- run
-      debugAndWait
-
+mainReflexSimpleInput = do
   runFn 3197 $ mainWidget $ do
     text "hello 2 3"
     inp <- inputElement def
     display $ value inp
 
+mainReflex = do
+  runFn 3197 $ mainWidget $ do
+    text "hello 2 3"
+    -- inp <- inputElement def
+    inp <- textInput def
+    -- display $ value inp
+
+    -- (valEv, valTrigger) <- newTriggerEvent
+
+    -- liftJSM $ do
+    --   jsFun <- JSA.eval [q|(function(el, cb) {
+    --     try {
+    --       el.addEventListener('input', function(e) {
+    --         cb(el.value)
+    --         if (e.keyCode == 13 && !e.shiftKey) {
+    --           e.preventDefault()
+    --           cb(el.value)
+    --         } else {
+    --         }
+    --       })
+    --     } catch(e) {
+    --       console.error(e)
+    --       throw(e)
+    --     }
+    --   })|]
+    --   jsValUpdater <- JSA.eval [q|(function(el, cb) {
+    --     try {
+    --       el.addEventListener('input', function(e) {
+    --         cb(el.value)
+    --       })
+    --     } catch(e) {
+    --       console.error(e)
+    --       throw(e)
+    --     }
+    --   })|]
+    --   JSA.call jsFun JSA.global
+    --     ( _textInput_element  inp
+    --     -- , JSA.function $ \_ _ _ -> do
+    --     , JSA.asyncFunction $ \_ _ args -> do
+    --         -- prnt "!!!"
+    --         argsStr <- valToText args
+    --         -- prnt argsStr
+    --         prnt argsStr
+    --         -- io $ entersNoShiftTrigger ()
+    --     )
+    --   JSA.call jsValUpdater JSA.global
+    --     ( _textInput_element inp
+    --     , JSA.asyncFunction $ \_ _ args -> do
+    --         argsStr <- valToText args
+    --         prnt argsStr
+    --         io $ valTrigger argsStr
+    --     )
+
+    -- valDy <- holdDyn "" valEv
+
+    -- display valDy
+
+    noop
+
+noop = pure ()
+
 mainJSA = do
   putStrLn "init"
   -- debugAndWait 3197 $ do
-  run 3197 $ do
+  runFn 3197 $ do
     eval "document.write('asd')"
 
     -- inpEl <- eval "document.body.appendChild(document.createElement('input'))"
@@ -59,23 +121,28 @@ mainJSA = do
 
     jsFun <- JSA.eval [q|(function(el, cb) {
       try {
-        el.addEventListener('keypress', function(e) {
+        el.addEventListener('input', function(e) {
+          cb(el.value)
           if (e.keyCode == 13 && !e.shiftKey) {
             e.preventDefault()
-            cb()
+            cb(el.value)
           } else {
           }
         })
-      } catch (e) {
+      } catch(e) {
         console.error(e)
+        throw(e)
       }
     })|]
     JSA.call jsFun JSA.global
       ( taEl
       -- , JSA.function $ \_ _ _ -> do
-      , JSA.asyncFunction $ \_ _ _ -> do
-        prnt "!!!"
-        -- io $ entersNoShiftTrigger ()
+      , JSA.asyncFunction $ \_ _ args -> do
+          -- prnt "!!!"
+          argsStr <- valToText args
+          -- prnt argsStr
+          prnt argsStr
+          -- io $ entersNoShiftTrigger ()
       )
 
 
