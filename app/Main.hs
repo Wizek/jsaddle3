@@ -7,6 +7,7 @@
 module Main where
 
 import            Data.Text
+import            Data.Text as T
 import            Control.Monad
 import            Control.Concurrent
 import            Control.Monad.Trans
@@ -18,18 +19,25 @@ import            Language.Javascript.JSaddle.Debug
 import            Language.Javascript.JSaddle        as JSA
 import            Language.Javascript.JSaddle.Warp   as JSA
 import            Language.Javascript.JSaddle.Debug  as JSA
+
+import            Language.Javascript.JSaddle.WebKitGTK  as Wk
+
 import            Text.InterpolatedString.Perl6
 import            Reflex.Dom.Core
 import            Control.Lens hiding ((.>), element)
 
+default ((), Int, Text)
 
 main =
-  mainReflex
   -- mainJSA
+  -- mainReflex
+  -- mainReflexSimpleInput
+  mainDisplayOddity
 
 runFn =
   -- run
   debugAndWait
+  -- \_ -> Wk.run
 
 mainReflexSimpleInput = do
   runFn 3197 $ mainWidget $ do
@@ -37,65 +45,90 @@ mainReflexSimpleInput = do
     inp <- inputElement def
     display $ value inp
 
+mainDisplayOddity = do
+  JSA.run 3197 $ mainWidget $ do
+
+    (valEv, valTrigger) <- newTriggerEvent
+
+    io $ forkIO $ forM_ [1 .. 20 :: Int] $ \i -> do
+      valTrigger $ i
+      threadDelay $ 1000 * 1000
+
+    valDy <- holdDyn 0 valEv
+    display valDy
+{-
 mainReflex = do
   runFn 3197 $ mainWidget $ do
-    text "hello 2 3"
-    -- inp <- inputElement def
-    inp <- textInput def
-    -- display $ value inp
+    -- textInput def
+    dtext "hello 2"
+    -- (domElement, _) <- el' "input" noop
+    domElement <- buildEmptyElement "textarea" ("style" =: "width:700px")
 
-    -- (valEv, valTrigger) <- newTriggerEvent
+    (valEv, valTrigger) <- newTriggerEvent
+    liftJSM $ do
+      jsFun <- JSA.eval [q|(function(el, cb) {
+        try {
+          el.addEventListener('input', function(e) {
+            cb(el.value)
+            if (e.keyCode == 13 && !e.shiftKey) {
+              e.preventDefault()
+              cb(el.value)
+            } else {
+            }
+          })
+        } catch(e) {
+          console.error(e)
+          throw(e)
+        }
+      })|]
+      jsValUpdater <- JSA.eval [q|(function(el, cb) {
+        try {
+          el.addEventListener('input', function(e) {
+            cb(el.value)
+          })
+        } catch(e) {
+          console.error(e)
+          throw(e)
+        }
+      })|]
+      -- JSA.call jsFun JSA.global
+      --   ( _textInput_element  inp
+      --   -- , JSA.function $ \_ _ _ -> do
+      --   , JSA.asyncFunction $ \_ _ args -> do
+      --       -- prnt "!!!"
+      --       argsStr <- valToText args
+      --       -- prnt argsStr
+      --       prnt argsStr
+      --       -- io $ entersNoShiftTrigger ()
+      --   )
 
-    -- liftJSM $ do
-    --   jsFun <- JSA.eval [q|(function(el, cb) {
-    --     try {
-    --       el.addEventListener('input', function(e) {
-    --         cb(el.value)
-    --         if (e.keyCode == 13 && !e.shiftKey) {
-    --           e.preventDefault()
-    --           cb(el.value)
-    --         } else {
-    --         }
-    --       })
-    --     } catch(e) {
-    --       console.error(e)
-    --       throw(e)
-    --     }
-    --   })|]
-    --   jsValUpdater <- JSA.eval [q|(function(el, cb) {
-    --     try {
-    --       el.addEventListener('input', function(e) {
-    --         cb(el.value)
-    --       })
-    --     } catch(e) {
-    --       console.error(e)
-    --       throw(e)
-    --     }
-    --   })|]
-    --   JSA.call jsFun JSA.global
-    --     ( _textInput_element  inp
-    --     -- , JSA.function $ \_ _ _ -> do
-    --     , JSA.asyncFunction $ \_ _ args -> do
-    --         -- prnt "!!!"
-    --         argsStr <- valToText args
-    --         -- prnt argsStr
-    --         prnt argsStr
-    --         -- io $ entersNoShiftTrigger ()
-    --     )
-    --   JSA.call jsValUpdater JSA.global
-    --     ( _textInput_element inp
-    --     , JSA.asyncFunction $ \_ _ args -> do
-    --         argsStr <- valToText args
-    --         prnt argsStr
-    --         io $ valTrigger argsStr
-    --     )
+      -- JSA.call jsValUpdater JSA.global
+      --   -- ( _el_element domElement
+      --   -- ( _element_raw domElement
+      --   ( domElement
+      --   , JSA.asyncFunction $ \_ _ args -> do
+      --       argsStr <- valToText args
+      --       prnt argsStr
+      --       io $ valTrigger argsStr
+      --   )
 
-    -- valDy <- holdDyn "" valEv
+      noop
 
-    -- display valDy
+    (valEv, valTrigger) <- newTriggerEvent
+
+    io $ forkIO $ forM_ [1..20 :: Int] $ \i -> do
+      valTrigger $ i
+      threadDelay $ 1000 * 1000
+
+    valDy <- holdDyn 0 valEv
+    display valDy
+
 
     noop
 
+-}
+
+dtext = el "div" . text
 noop = pure ()
 
 mainJSA = do

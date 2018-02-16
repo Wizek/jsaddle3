@@ -25,10 +25,14 @@ dependencies:
 - text
 - lens
 - jsaddle
-- jsaddle-warp
+# - jsaddle-warp
+# - jsaddle-webkitgtk
+# - jsaddle-webkit2gtk
+# - gi-javascriptcore
 - interpolatedstring-perl6
 - reflex
 - reflex-dom-core
+- reflex-dom
 # - transformers
 
 library:
