@@ -15,7 +15,11 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
+
 resolver: lts-10.4
+
+# compiler: ghc-8.0.2
+# resolver: lts-9.14
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -51,6 +55,9 @@ packages:
 #     commit: 60d2878142943487987feeeea108dbed5405f469
 #   extra-dep: true
 
+
+
+
 - location: ./packages/reflex-dom/reflex-dom-core/
   extra-dep: true
 
@@ -61,6 +68,30 @@ packages:
   extra-dep: true
 - location: ./packages/jsaddle/jsaddle-warp/
   extra-dep: true
+
+
+
+
+# - location:
+#     git: https://github.com/reflex-frp/reflex
+#     commit: 60d2878142943487987feeeea108dbed5405f469
+#   extra-dep: true
+
+# - location:
+#     git: https://github.com/Wizek/reflex-dom
+#     commit: f8fa723a24859f276b1128cd5b6299ddd4fde5ce
+#   extra-dep: true
+#   subdirs:
+#     - reflex-dom
+#     - reflex-dom-core
+
+# - location:
+#     git: https://github.com/reflex-frp/reflex-dom-contrib
+#     commit: 88bfbf5df196c2207e50e88e78ae9b43af4be44b
+#   extra-dep: true
+
+
+
 
 # - location:
 #     # git: https://github.com/reflex-frp/reflex-dom
@@ -84,8 +115,6 @@ extra-deps:
 - bifunctors-5.4.2
 - prim-uniq-0.1.0.1
 - zenc-0.1.1
-
-
 - jsaddle-webkitgtk-0.9.0.0
 - gi-gtk-3.0.19
 - gi-javascriptcore-3.0.15
@@ -103,6 +132,64 @@ extra-deps:
 - haskell-gi-base-0.20.8
 # - haskell-gi-overloading-1.0
 - process-1.4.3.0
+
+
+
+# From the main project:
+# - concurrent-extra-0.7.0.11
+# - list-extras-0.4.1.4
+
+
+# - minilens-1.0.0.2
+# - jsaddle-webkitgtk-0.9.0.0
+
+# - compose-ltr-0.2.4
+# - dump-0.2.8
+# - ghcjs-dom-0.9.2.0
+# - jsaddle-0.9.4.0
+# - jsaddle-webkit2gtk-0.9.4.0
+# - prim-uniq-0.1.0.1
+# - ref-tf-0.4.0.1
+# - time-qq-0.0.1.0
+# - twitch-0.1.7.1
+# - vcache-0.2.6
+# - vcache-trie-0.2.4
+# - zenc-0.1.1
+
+# - direct-murmur-hash-1.0.1
+# - ghcjs-dom-jsaddle-0.9.2.0
+# - gi-webkit2-4.0.14
+# # - haskell-gi-overloading-0.0
+# - lmdb-0.2.5
+# - webkit2gtk3-javascriptcore-0.14.2.1
+
+# - jsaddle-dom-0.9.2.0
+
+# - gi-javascriptcore-4.0.14
+# - haskell-gi-0.20.3
+# - haskell-gi-base-0.20.5
+# # - haskell-gi-overloading-0.0
+# - haskell-gi-overloading-1.0
+
+# - GenericPretty-1.2.1
+# - dependent-sum-template-0.0.0.6
+
+# - directory-1.2.7.1
+# - aeson-1.0.2.1
+# - vector-0.11.0.0
+# - primitive-0.6.1.0
+
+# - jsaddle-warp-0.9.5.0
+
+
+# - dph-base-0.7.0.1
+# - dph-lifted-vseg-0.7.0.1
+# - dph-prim-par-0.7.0.1
+# - dph-lifted-base-0.7.0.1
+# - dph-prim-interface-0.7.0.1
+# - dph-prim-seq-0.7.0.1
+
+
 
 
 allow-newer: true

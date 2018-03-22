@@ -1,6 +1,7 @@
 {-# language RankNTypes #-}
 {-# language QuasiQuotes #-}
 {-# language OverloadedStrings #-}
+{-# language FlexibleContexts #-}
 {-# language ExtendedDefaultRules #-}
 {-# language NoMonomorphismRestriction #-}
 
@@ -24,7 +25,18 @@ import            Language.Javascript.JSaddle.Debug  as JSA
 
 import            Text.InterpolatedString.Perl6
 import            Reflex.Dom.Core
+import            Reflex.Dom.Core as R
+import            Reflex.Dom.Core as Reflex
 import            Control.Lens hiding ((.>), element)
+
+
+
+import qualified  GHCJS.DOM                         as DOM
+import qualified  GHCJS.DOM.EventM                  as DOM
+import qualified  GHCJS.DOM.Element                 as DOM
+import qualified  GHCJS.DOM.MouseEvent              as DOM
+-- import qualified  GHCJS.DOM.GlobalEventHandlers              as DOM
+
 
 default ((), Int, Text)
 
@@ -190,6 +202,17 @@ mainJSA = do
     dyA <- holdDyn "x" valEv
     display dyA
     -}
+    (rootEl, _) <- el' "div" $ text "Mousemove"
+
+    let moveEv = domEvent Mousemove rootEl
+    -- let moveEv = domEvent Mouseenter rootEl
+    -- moveEv <- wrapDomEvent rootEl (`DOM.on` DOM.mouseMove) getMouseEventCoords
+    -- moveEv <- wrapDomEvent rootEl (`DOM.on` DOM.mouseMovementXY) getMouseEventCoords
+
+    -- moveDy <- holdDyn (0, 0) $ moveEv
+    c <- R.count moveEv
+    -- moveDy <- holdDyn 0 $ updated c
+    display c
 
     inp <- textInput def
     display $ value inp

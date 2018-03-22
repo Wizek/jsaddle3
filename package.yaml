@@ -33,6 +33,8 @@ dependencies:
 - reflex
 - reflex-dom-core
 # - reflex-dom
+# - ghcjs-dom-jsaddle
+- ghcjs-dom
 - unliftio-core
 # - transformers
 
