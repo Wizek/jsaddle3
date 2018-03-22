@@ -37,33 +37,44 @@ resolver: lts-10.4
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - .
-- location:
-    git: https://github.com/ghcjs/jsaddle.git
-    commit: fb9ba5a036efc8ebe9b528391c21c6880ce2e4c6
+# - location:
+#     git: https://github.com/ghcjs/jsaddle.git
+#     commit: fb9ba5a036efc8ebe9b528391c21c6880ce2e4c6
+#   extra-dep: true
+#   subdirs:
+#     - jsaddle-warp
+#     - jsaddle
+
+
+# - location:
+#     git: https://github.com/reflex-frp/reflex
+#     commit: 60d2878142943487987feeeea108dbed5405f469
+#   extra-dep: true
+
+- location: ./packages/reflex-dom/reflex-dom-core/
   extra-dep: true
-  subdirs:
-    - jsaddle-warp
-    - jsaddle
 
-
-- location:
-    git: https://github.com/reflex-frp/reflex
-    commit: 60d2878142943487987feeeea108dbed5405f469
+- location: ./packages/reflex/
   extra-dep: true
 
-- location:
-    # git: https://github.com/reflex-frp/reflex-dom
-    git: https://github.com/Wizek/reflex-dom
-    # commit: 1cdea3187bfadda0ffb1ba680a1c0c4260bc4fc6
-    # commit: 88467834b7a0914ff2cca2bb83689965b8634cff
-    # commit: a9f1582f1496f78497ddf037b7e197158bf2163f
-
-    # commit: f8fa723a24859f276b1128cd5b6299ddd4fde5ce
-    commit: 95f13b55044094883d98f01ff3e8971283b92dc3
+- location: ./packages/jsaddle/jsaddle/
   extra-dep: true
-  subdirs:
-    # - reflex-dom
-    - reflex-dom-core
+- location: ./packages/jsaddle/jsaddle-warp/
+  extra-dep: true
+
+# - location:
+#     # git: https://github.com/reflex-frp/reflex-dom
+#     git: https://github.com/Wizek/reflex-dom
+#     # commit: 1cdea3187bfadda0ffb1ba680a1c0c4260bc4fc6
+#     # commit: 88467834b7a0914ff2cca2bb83689965b8634cff
+#     # commit: a9f1582f1496f78497ddf037b7e197158bf2163f
+
+#     # commit: f8fa723a24859f276b1128cd5b6299ddd4fde5ce
+#     commit: 95f13b55044094883d98f01ff3e8971283b92dc3
+#   extra-dep: true
+#   subdirs:
+#     # - reflex-dom
+#     - reflex-dom-core
 
 allow-newer: true
 

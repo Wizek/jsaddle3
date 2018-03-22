@@ -1,0 +1,14 @@
+[submodule "reflex-dom"]
+  path = packages/reflex-dom
+
+[submodule "reflex"]
+  path = packages/reflex
+
+[submodule "ghcjs-base"]
+  path = packages/ghcjs-base
+
+[submodule "ghcjs-dom"]
+  path = packages/ghcjs-dom
+
+[submodule "jsaddle"]
+  path = packages/jsaddle

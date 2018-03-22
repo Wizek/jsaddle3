@@ -28,11 +28,12 @@ import            Control.Lens hiding ((.>), element)
 
 default ((), Int, Text)
 
-main =
-  -- mainJSA
+main = do
+  putStrLn "init"
+  mainJSA
   -- mainReflex
   -- mainReflexSimpleInput
-  mainDisplayOddity
+  -- mainDisplayOddity
 
 runFn =
   -- run
@@ -134,51 +135,64 @@ noop = pure ()
 mainJSA = do
   putStrLn "init"
   -- debugAndWait 3197 $ do
-  runFn 3197 $ do
-    eval "document.write('asd')"
+  runFn 3197 $ mainWidget $ do
+    {-
+    (valEv, valTrigger) <- newTriggerEvent
 
-    -- inpEl <- eval "document.body.appendChild(document.createElement('input'))"
-    taEl <- eval "document.body.appendChild(document.createElement('textarea'))"
+    (_, taEl) <- el' "textarea" blank
 
-    -- result <- liftIO newEmptyMVar
-    -- deRefVal $ call (eval "(function(f) {f('Hello');})") global [fun $ \ _ _ [arg1] -> do
-    --   valToText arg1 >>= (liftIO . putMVar result)
-    --   ]
-    -- liftIO $ takeMVar result >>= print
-    -- inp <- textArea
-    -- jsFn <- eval "(function (cb) { try{cb(3);console.log(1)}catch(e){console.warn(e);alert(2)} })"
-    -- -- jsFn <- eval "(function (cb) { try{cb(3);console.log(1)}catch(e){console.warn(e);alert(2)} })"
+    liftJSM $ do
 
-    -- (funJsv) <- function $ \ _ _ args -> do
-    --   io $ print 13333
+      -- eval "document.write('asd2')"
 
-    jsFun <- JSA.eval [q|(function(el, cb) {
-      try {
-        el.addEventListener('input', function(e) {
-          cb(el.value)
-          if (e.keyCode == 13 && !e.shiftKey) {
-            e.preventDefault()
+      -- inpEl <- eval "document.body.appendChild(document.createElement('input'))"
+      -- taEl <- eval "document.body.appendChild(document.createElement('textarea'))"
+
+      -- result <- liftIO newEmptyMVar
+      -- deRefVal $ call (eval "(function(f) {f('Hello');})") global [fun $ \ _ _ [arg1] -> do
+      --   valToText arg1 >>= (liftIO . putMVar result)
+      --   ]
+      -- liftIO $ takeMVar result >>= print
+      -- inp <- textArea
+      -- jsFn <- eval "(function (cb) { try{cb(3);console.log(1)}catch(e){console.warn(e);alert(2)} })"
+      -- -- jsFn <- eval "(function (cb) { try{cb(3);console.log(1)}catch(e){console.warn(e);alert(2)} })"
+
+      -- (funJsv) <- function $ \ _ _ args -> do
+      --   io $ print 13333
+
+      jsFun <- JSA.eval [q|(function(el, cb) {
+        try {
+          el.addEventListener('input', function(e) {
             cb(el.value)
-          } else {
-          }
-        })
-      } catch(e) {
-        console.error(e)
-        throw(e)
-      }
-    })|]
-    JSA.call jsFun JSA.global
-      ( taEl
-      -- , JSA.function $ \_ _ _ -> do
-      , JSA.asyncFunction $ \_ _ args -> do
-          -- prnt "!!!"
-          argsStr <- valToText args
-          -- prnt argsStr
-          prnt argsStr
-          -- io $ entersNoShiftTrigger ()
-      )
+            if (e.keyCode == 13 && !e.shiftKey) {
+              e.preventDefault()
+              cb(el.value)
+            } else {
+            }
+          })
+        } catch(e) {
+          console.error(e)
+          throw(e)
+        }
+      })|]
+      JSA.call jsFun JSA.global
+        ( taEl
+        -- , JSA.function $ \_ _ _ -> do
+        , JSA.asyncFunction $ \_ _ args -> do
+            -- prnt "!!!"
+            argsStr <- valToText args
+            -- prnt argsStr
+            prnt argsStr
+            io $ valTrigger argsStr
+            -- io $ entersNoShiftTrigger ()
+        )
 
+    dyA <- holdDyn "x" valEv
+    display dyA
+    -}
 
+    inp <- textInput def
+    display $ value inp
 
     -- call jsFun jsFun [funJsv]
     -- call jsFn jsFn [funJsv]

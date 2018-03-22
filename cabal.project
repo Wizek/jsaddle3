@@ -1,3 +1,6 @@
 packages:
   ./
   ./packages/reflex-dom/reflex-dom-core/
+  ./packages/jsaddle/jsaddle/
+  -- ./packages/jsaddle/jsaddle-warp/
+  -- ./packages/jsaddle/jsaddle-dom/

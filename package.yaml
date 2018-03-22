@@ -33,6 +33,7 @@ dependencies:
 - reflex
 - reflex-dom-core
 # - reflex-dom
+- unliftio-core
 # - transformers
 
 library:
