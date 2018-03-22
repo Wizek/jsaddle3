@@ -20,7 +20,7 @@ import            Language.Javascript.JSaddle        as JSA
 import            Language.Javascript.JSaddle.Warp   as JSA
 import            Language.Javascript.JSaddle.Debug  as JSA
 
-import            Language.Javascript.JSaddle.WebKitGTK  as Wk
+-- import            Language.Javascript.JSaddle.WebKitGTK  as Wk
 
 import            Text.InterpolatedString.Perl6
 import            Reflex.Dom.Core

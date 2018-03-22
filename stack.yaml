@@ -57,11 +57,15 @@ packages:
     # commit: 1cdea3187bfadda0ffb1ba680a1c0c4260bc4fc6
     # commit: 88467834b7a0914ff2cca2bb83689965b8634cff
     # commit: a9f1582f1496f78497ddf037b7e197158bf2163f
-    commit: f8fa723a24859f276b1128cd5b6299ddd4fde5ce
+
+    # commit: f8fa723a24859f276b1128cd5b6299ddd4fde5ce
+    commit: 95f13b55044094883d98f01ff3e8971283b92dc3
   extra-dep: true
   subdirs:
     # - reflex-dom
     - reflex-dom-core
+
+allow-newer: true
 
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)

@@ -29,6 +29,8 @@ in
   };
 
   overrides = self: super: with pkgs.haskell.lib; {
+    # reflex-dom-core = dontHaddock (dontCheck (self.callCabal2nix "reflex-dom-core"
+    #   ./reflex-dom/reflex-dom-core {}));
     gi-javascriptcore = self.callHackage "gi-javascriptcore" "3.0.14" {};
   };
   #   # compose-ltr = pkgs.haskell.lib.dontCheck (self.callHackage "compose-ltr" "0.2.4" {});

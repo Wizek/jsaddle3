@@ -1,0 +1,3 @@
+packages:
+  ./
+  ./packages/reflex-dom/reflex-dom-core/
