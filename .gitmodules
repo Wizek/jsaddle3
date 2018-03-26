@@ -1,14 +1,19 @@
 [submodule "reflex-dom"]
   path = packages/reflex-dom
+  url = https://github.com/Wizek/reflex-dom
 
 [submodule "reflex"]
   path = packages/reflex
+  url = https://github.com/reflex-frp/reflex
 
 [submodule "ghcjs-base"]
   path = packages/ghcjs-base
+  url = https://github.com/ghcjs/ghcjs-base
 
 [submodule "ghcjs-dom"]
   path = packages/ghcjs-dom
+  url = https://github.com/ghcjs/ghcjs-dom
 
 [submodule "jsaddle"]
   path = packages/jsaddle
+  url = https://github.com/Wizek/jsaddle
